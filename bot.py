@@ -22,11 +22,15 @@ logger.addHandler(handler)
 
 client = discord.Client()
 
+with open('discord.json', 'r') as g:
+    g_load = json.load(g)
+    bot_token = g_load['bot_token']
+
 @client.event
 async def on_ready():
     print(f'We have logged in as {client.user}')
-    get_skills()
-    get_standings()
+    #get_skills()
+    #get_standings()
 @client.event
 async def on_message(message):
     if message.author == client.user:
@@ -80,4 +84,4 @@ async def on_message(message):
         res = brokerfee()
         await message.channel.send(res)
 
-client.run('OTM5NjE5NDY4NzczMDQ0MjU0.Yf7e0g.CrqzvdBOSe0KNN78Tm85xLsYk3w')
+client.run(bot_token)

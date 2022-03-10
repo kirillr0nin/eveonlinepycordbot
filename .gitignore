@@ -4,12 +4,5 @@ settings.json
 discord.log
 standings.json
 credsbackup.py
-__pycache__/authflow.cpython-310.pyc
-__pycache__/commands.cpython-310.pyc
-__pycache__/creds.cpython-310.pyc
-__pycache__/jwt.cpython-310.pyc
-__pycache__/login.cpython-310.pyc
-__pycache__/revokerefreshtoken.cpython-310.pyc
-__pycache__/ssoresponse.cpython-310.pyc
-__pycache__/testrefresh.cpython-310.pyc
-__pycache__/tokenrefresh.cpython-310.pyc
+__pycache__
+discord.json
