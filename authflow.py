@@ -14,7 +14,7 @@ def print_auth_url():
         "redirect_uri": callback_url,
         "client_id": client_id,
         "scope": 'publicData ' + 'esi-skills.read_skills.v1 ' + 'esi-wallet.read_character_wallet.v1 ' + 'esi-characters.read_standings.v1 ' + 'esi-markets.read_character_orders.v1',
-        "state": "moet"
+        "state": "randomstuff"
     }
     string_params = urllib.parse.urlencode(params)
     full_auth_url = "{}?{}".format(base_auth_url, string_params)
