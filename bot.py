@@ -8,7 +8,7 @@ from discord.ext import tasks, commands
 import os
 from ssoresponse import handle_sso_token_response
 from tokenrefresh import revoke_refresh_token
-from commands import wallet, get_skills, get_standings, parse_broker, parse_corp, parse_faction, brokerfee
+from commands import wallet, get_skills, get_standings, parse_broker, parse_corp, parse_faction, brokerfee, trade
 
 intents = discord.Intents.default()
 intents.members = True
@@ -84,4 +84,16 @@ async def on_message(message):
         res = brokerfee()
         await message.channel.send(res)
 
+    if message.content.startswith('!'):
+        await message.channel.send("Buy:")
+        buy = await client.wait_for('message', check=None, timeout=30)
+        await message.channel.send("Sell:")
+        sell = await client.wait_for('message', check=None, timeout=30)
+        buyint = float(buy.content)
+        sellint = float(sell.content)
+        trading = trade(buy=buyint, sell=sellint)
+        if trading > 0:
+            await message.channel.send("`\U0001F44D Your profit is: {}`".format(f"{trading:,}"))
+        else:
+            await message.channel.send("`\U0001F6D1 Your loss is: {}`".format(f"{trading:,}"))
 client.run(bot_token)

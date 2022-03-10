@@ -81,12 +81,31 @@ def brokerfee():
     with open('skills.json', 'r') as skills_file:
         d = json.load(skills_file)
         broker = d['skills'][0]['broker_relations']
+        accounting = d['skills'][0]['accounting']
     with open('standings.json', 'r') as standings_file:
         d = json.load(standings_file)
         faction = d['standings'][0]['caldari_state']
         corp = d['standings'][0]["caldari_navy"]
     res = 0.03-(0.003 * broker)-(0.0003 * faction)-(0.0002 * corp)
-    return res
+    sales = 0.08 - 0.0088 * accounting
+    return res, sales
+
+def trade(buy, sell):
+    with open('skills.json', 'r') as skills_file:
+        d = json.load(skills_file)
+        broker = d['skills'][0]['broker_relations']
+        accounting = d['skills'][0]['accounting']
+    with open('standings.json', 'r') as standings_file:
+        d = json.load(standings_file)
+        faction = d['standings'][0]['caldari_state']
+        corp = d['standings'][0]["caldari_navy"]
+    broker = 0.03-(0.003 * broker)-(0.0003 * faction)-(0.0002 * corp)
+    sales = 0.08 - 0.0088 * accounting
+    buyorder = buy + (buy * broker)
+    sellorder = sell - ((sell * sales) + (sell * broker))
+    profit = sellorder - buyorder
+    percprofit = (buyorder / sellorder) * 100
+    return profit
 
 def parse_faction(caldaristate, data):
     for standing in data:
