@@ -1,1 +1,1 @@
-Very basic discord bot that connects to eve online api.
+# THIS THING SOMEHOW WORKS

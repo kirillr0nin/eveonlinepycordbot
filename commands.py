@@ -1,6 +1,6 @@
+from tkinter import N
 import requests
 import json
-import ast
 
 def wallet():
     with open('token.json', 'r') as token_file:
@@ -92,38 +92,55 @@ def parse_faction(caldaristate, data):
     for standing in data:
         if standing['from_id'] == caldaristate:
             cldrstanding = standing['standing']
-            return cldrstanding
+            if cldrstanding > 0:
+                return cldrstanding
+            else:
+                n = 0
+                return n
         else:
-            return 
-
+            n = 0
+            return n
 def parse_corp(caldarinavy, data):
     for standing in data:
         if standing['from_id'] == caldarinavy:
             navystanding = standing['standing']
-            return navystanding
+            if navystanding > 0:
+                return navystanding
+            else:
+                n = 0
+                return n
         else:
-            return
+            n = 0
+            return n
 
 def parse_accounting(acc, data):
     for skill in data['skills']:
         if skill['skill_id'] == acc:
             acclvl = skill['trained_skill_level']
-            return acclvl
-        else:
-            print('Error!')
+            if acclvl > 0:
+                return acclvl
+            else:
+                n = 0
+                return n
+
 
 def parse_broker(broker, data):
     for skill in data['skills']:
         if skill['skill_id'] == broker:
             brokerlvl = skill['trained_skill_level']
-            return brokerlvl
-        else:
-            print('Error!')
+            if brokerlvl > 0:
+                return brokerlvl
+            else:
+                n = 0
+                return n
+
 
 def parse_abr(abr, data):
     for skill in data['skills']:
         if skill['skill_id'] == abr:
             abrlvl = skill['trained_skill_level']
-            return abrlvl
-        else:
-            print('Error!')
+            if abrlvl > 0:
+                return abrlvl
+            else:
+                n = 0
+                return n

@@ -29,8 +29,8 @@ with open('discord.json', 'r') as g:
 @client.event
 async def on_ready():
     print(f'We have logged in as {client.user}')
-    #get_skills()
-    #get_standings()
+    get_skills()
+    get_standings()
 @client.event
 async def on_message(message):
     if message.author == client.user:
