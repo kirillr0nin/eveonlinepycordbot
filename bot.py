@@ -56,6 +56,7 @@ async def on_message(message):
         red = login(auth_code)
         await message.channel.send(red)
         await message.channel.send('Logged in!')
+        refreshtoken.start()
 
     if message.content.startswith('!refreshtoken'):
         with open('token.json', 'r') as r:
@@ -96,4 +97,18 @@ async def on_message(message):
             await message.channel.send("`\U0001F44D Your profit is: {}`".format(f"{trading:,}"))
         else:
             await message.channel.send("`\U0001F6D1 Your loss is: {}`".format(f"{trading:,}"))
+
+@tasks.loop(minutes=18)
+async def refreshtoken():
+    with open('token.json', 'r') as r:
+            h = json.loads(r.read())
+            refresh_token = h['refresh_token']
+    with open('settings.json', 'r') as a:
+            b = json.load(a)
+            client_id = b['settings'][0]["client_id"]
+            client_secret = b['settings'][0]["client_secret"]
+    rem = revoke_refresh_token(refresh_token=refresh_token, client_id=client_id, client_secret=client_secret)
+    print(rem)
+
+
 client.run(bot_token)

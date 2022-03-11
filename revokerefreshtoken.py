@@ -29,7 +29,7 @@ def revoke_refresh_token(refresh_token, client_id, client_secret):
         print("The sso meta endpoint did not include the expected key "
               "revocation_endpoint. \nSSO meta info received is: "
               "{}".format(sso_meta))
-        sys.exit(1)
+        #sys.exit(1)
 
     form_values = {
         "token": refresh_token,
@@ -48,7 +48,7 @@ def revoke_refresh_token(refresh_token, client_id, client_secret):
         print("Something went wrong with the request to revoke your token. "
               "\nThe status code from EVE SSO is {} \nThe response body "
               "is {}".format(res.status_code, res.json()))
-        sys.exit(1)
+        #sys.exit(1)
 
     return res.status_code
 

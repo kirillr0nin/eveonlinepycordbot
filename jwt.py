@@ -26,7 +26,7 @@ def validate_eve_jwt(jwt_token):
         print("Something went wrong when retrieving the JWK set. The returned "
               "payload did not have the expected key {}. \nPayload returned "
               "from the SSO looks like: {}".format(e, data))
-        sys.exit(1)
+        #sys.exit(1)
 
     jwk_set = next((item for item in jwk_sets if item["alg"] == "RS256"))
 
@@ -39,10 +39,10 @@ def validate_eve_jwt(jwt_token):
         )
     except ExpiredSignatureError:
         print("The JWT token has expired: {}")
-        sys.exit(1)
+        #sys.exit(1)
     except JWTError as e:
         print("The JWT signature was invalid: {}").format(str(e))
-        sys.exit(1)
+        #sys.exit(1)
 
 def main():
     """Manually input a JWT token to be validated."""
